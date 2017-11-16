@@ -40,6 +40,7 @@ public class Player {
 	}
 	//Check to see position of the player. Used to see if he's crossed the finish line
 	public Rectangle getBounds() {
-		return new Rectangle(x, Y, WIDTH, HEIGHT);
+		//Wait until player is halfway past the finish line
+		return new Rectangle(x, Y, WIDTH-10, HEIGHT);
 	}
 }
