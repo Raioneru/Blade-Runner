@@ -4,9 +4,13 @@ import java.awt.event.KeyEvent;
 
 public class Player {
 	//Player sprite dimensions
-	private static final int Y = 150;
+	//private static final int Y = 150;
 	private static final int WIDTH = 20;
 	private static final int HEIGHT = 50;
+	int Y;
+
+	//Robot Sprite dimensions
+	private static final int Yrobot = 250;
 
 	//Initial position
 	int x = 0;
@@ -14,8 +18,9 @@ public class Player {
 
 	private Game game;
 
-	public Player(Game game) {
+	public Player(Game game, int Y) {
 		this.game = game;
+		this.Y = Y;
 	}
 
 	//Move player only to the right
@@ -41,6 +46,6 @@ public class Player {
 	//Check to see position of the player. Used to see if he's crossed the finish line
 	public Rectangle getBounds() {
 		//Wait until player is halfway past the finish line
-		return new Rectangle(x, Y, WIDTH-10, HEIGHT);
+		return new Rectangle(x, Y, WIDTH, HEIGHT);
 	}
 }
