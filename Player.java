@@ -8,14 +8,9 @@ public class Player {
 	private static final int WIDTH = 20;
 	private static final int HEIGHT = 50;
 	int Y;
-
-	//Robot Sprite dimensions
-	private static final int Yrobot = 250;
-
 	//Initial position
 	int x = 0;
 	int xa = 0;
-
 	private Game game;
 
 	public Player(Game game, int Y) {

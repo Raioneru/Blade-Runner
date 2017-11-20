@@ -1,14 +1,7 @@
-// import java.awt.Color;
-// import java.awt.Font;
-// import java.awt.Graphics;
-// import java.awt.Graphics2D;
-// import java.awt.RenderingHints;
-// import java.awt.event.KeyEvent;
-// import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
 import java.awt.*;  
 import java.awt.event.*; 
 import java.util.Random; 
@@ -18,10 +11,10 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 	FinishLine finishline = new FinishLine(this);
 	Player player = new Player(this,100);
 	Player robot1 = new Player(this,250);
-	Player robot2 = new Player(this,400);
-	Player robot3 = new Player(this,550);
 
 	int clicks =0;
+
+	int count = 0;
 
 	public Game() {
 		//Create and register listeners
@@ -86,27 +79,23 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		player.move();
 		
 		int ranNum1 = new Random().nextInt(3);
-		int ranNum2 = new Random().nextInt(3);
-		int ranNum3 = new Random().nextInt(3);
+		int paramLow = new Random().nextInt(60) +3;
+		int paramHigh = new Random().nextInt(60);		
 		//AI determines when to move
-		if(ranNum1 <ranNum2 && ranNum1>ranNum3){
+		if(1 <2 && count>paramLow && count< paramHigh){
+		//if(ranNum1 <2 && count>2 && count< 30){
 			robot1.xa = 1;			
 		}else{
 			robot1.xa = 0;
 		}
 		robot1.move();
-		if(ranNum2 <ranNum3  && ranNum2>ranNum1){
-			robot2.xa = 1;
-		}else{
-			robot2.xa = 0;
+
+		if (count>60) {
+			count = 0;
 		}
-		robot2.move();
-		if(ranNum3 < ranNum1){
-			robot3.xa = 1;
-		}else{
-			robot3.xa = 0;
-		}
-		robot3.move();
+
+		count++;
+
 	}
 	public void paint(Graphics g) {
 		//this clears the screen before reprinting Player at new position
@@ -118,8 +107,6 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		finishline.paint(g2d);
 		player.paint(g2d);
 		robot1.paint(g2d);
-		robot2.paint(g2d);
-		robot3.paint(g2d);
 	} 
 	public void gameOver() {
 		//Shows a new window to end the game
