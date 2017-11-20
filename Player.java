@@ -15,9 +15,13 @@ public class Player {
 
 	public Player(Game game, int Y) {
 		this.game = game;
-		this.Y = Y;
+		if (Y%2==0){
+			this.Y = 50;
+		}else{
+			this.Y = 150;
+		}
+		
 	}
-
 	//Move player only to the right
 	public void move() {
 		if (x + xa > 0 && x + xa < game.getWidth() - WIDTH){

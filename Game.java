@@ -8,13 +8,19 @@ import java.util.Random;
 
 public class Game extends JPanel implements MouseListener, MouseMotionListener {
 	//Initialize Objects
-	FinishLine finishline = new FinishLine(this);
-	Player player = new Player(this,100);
-	Player robot1 = new Player(this,250);
-
 	int clicks =0;
 
 	int count = 0;
+	int ranNum1 = 75;
+	// int paramLow = new Random().nextInt(30)+3;
+	int paramLow = 20;
+	int paramHigh = new Random().nextInt(60);	
+
+
+	FinishLine finishline = new FinishLine(this);
+	Player player = new Player(this,paramHigh);
+	Player robot1 = new Player(this,paramHigh+1);
+
 
 	public Game() {
 		//Create and register listeners
@@ -78,11 +84,11 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		//Player sprite moves
 		player.move();
 		
-		int ranNum1 = new Random().nextInt(3);
-		int paramLow = new Random().nextInt(60) +3;
-		int paramHigh = new Random().nextInt(60);		
+		
+		//System.out.println("Count: "+count+" Low: "+paramLow+" High: "+paramHigh);
+		
 		//AI determines when to move
-		if(1 <2 && count>paramLow && count< paramHigh){
+		if(count <ranNum1 && count>paramLow && count< paramHigh){
 		//if(ranNum1 <2 && count>2 && count< 30){
 			robot1.xa = 1;			
 		}else{
@@ -90,11 +96,15 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		}
 		robot1.move();
 
-		if (count>60) {
+		if (count>300) {
+			//System.out.println("Reset");
 			count = 0;
+			ranNum1 = new Random().nextInt(300);
+			paramLow = new Random().nextInt(150)+25;
+			paramHigh = new Random().nextInt(300);
 		}
-
 		count++;
+		
 
 	}
 	public void paint(Graphics g) {
@@ -120,9 +130,9 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		Game game = new Game();
 		frame.add(game);
 		//Window size
-		//frame.setSize(300, 400);
+		frame.setSize(900, 400);
+		// frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		//Exits the program when the window gets closed
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
