@@ -28,12 +28,12 @@ public class FinishLine {
 	}
 	public void paint(Graphics2D g) {
 		//Use bottom lines for final. Smaller screen for testing
-		g.fillRect(X, 0, WIDTH, HEIGHT);		
-		// g.fillRect(screenWidth-30, 0, WIDTH, screenHeight);
+		// g.fillRect(X, 0, WIDTH, HEIGHT);		
+		g.fillRect(screenWidth-30, 0, WIDTH, screenHeight);
 	}
 	public Rectangle getBounds() {
-		return new Rectangle(X, 0, WIDTH, HEIGHT);
-		// return new Rectangle(screenWidth-30, 0, WIDTH, screenHeight);
+		// return new Rectangle(X, 0, WIDTH, HEIGHT);
+		return new Rectangle(screenWidth-30, 0, WIDTH, screenHeight);
 	}
 	private boolean collision() {
 		return game.player.getBounds().intersects(getBounds());
