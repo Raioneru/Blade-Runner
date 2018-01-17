@@ -8,14 +8,12 @@ public class FinishLine {
 	private static final int X = 700;
 	private static final int WIDTH = 5;
 	private static final int HEIGHT = 400;
-	// private static final int Y = 150;
-	// private static final int WIDTH = 20;
-	// private static final int HEIGHT = 50;
 
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int screenWidth = screenSize.width;
 	int screenHeight = screenSize.height;
 
+	//Create instance of Game
 	private Game game;
 
 	public FinishLine(Game game) {
@@ -36,6 +34,7 @@ public class FinishLine {
 		return new Rectangle(screenWidth-30, 0, WIDTH, screenHeight);
 	}
 	private boolean collision() {
+		game.player.getImageDimensions();
 		return game.player.getBounds().intersects(getBounds());
 	}
 }

@@ -19,9 +19,7 @@ public class Player{
 
 	int timer=0;
 	private Game game;
-	// ArrayList<Integer> positions = new ArrayList<>(Arrays.asList(50,150,250,350,450,650,750));
 	private static Vector<Integer> positions = new Vector<>(Arrays.asList(50,150,250,350,450,550));
-
 	protected int width;
 	protected int height;
 	protected boolean vis;
@@ -38,6 +36,7 @@ public class Player{
 		loadImage("character.png");
 
 	}
+	//upload image
     protected void loadImage(String imageName) {
         System.out.println("Sprite loadImage");
         ImageIcon ii = new ImageIcon(imageName);
@@ -45,7 +44,9 @@ public class Player{
     }
     protected void getImageDimensions() {
         width = image.getWidth(null);
+        // System.out.println("width: "+width);
         height = image.getHeight(null);
+        // System.out.println("height: "+height);
     }    
     public Image getImage() {
         return image;
@@ -69,7 +70,7 @@ public class Player{
 	}
 	//Create the player
 	public void paint(Graphics2D g) {
-		g.fillRect(x, Y, width, height);
+		g.fillRect(x, Y, 0, 0);
 	}
 	//Stop when the key is released
 	public void keyReleased(KeyEvent e) {
@@ -77,29 +78,24 @@ public class Player{
 	}
 	//When the keyboard is pressed
 	public void keyPressed(KeyEvent e) {
-		//Only allow movement to the right
+		//Walk with right key
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 			xa = 1;
+		//Run with up key
+		if (e.getKeyCode() == KeyEvent.VK_UP)
+			xa = 2;		
 	}
 	//Check to see position of the player. Used to see if he's crossed the finish line
 	public Rectangle getBounds() {
 		//Wait until player is halfway past the finish line
-		return new Rectangle(x, Y, width, height);
+		return new Rectangle(x, Y, 52-30, 65);
 	}
-
-
+	//Return x position
     public int getX() {
         return x;
     }
+    //Return y position
     public int getY() {
         return Y;
     }
-	// public int setTimer(int inTimer){
-	// 	timer = inTimer;
-	// }
-	// public boolean getTimer(int inTimer){
-	// 	if (timer ==0) {
-			
-	// 	}
-	// }	
 }

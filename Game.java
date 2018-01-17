@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Game extends JPanel implements MouseListener, MouseMotionListener {
 	//Initialize Objects
-	int clicks =0;
+	int clicks =1;
 
 	int count = 0;
 	int robot1Count =200;
@@ -27,7 +27,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 	int paramLow = 20;
 	int paramHigh = new Random().nextInt(60);	
 
-
+	//Create instances of sprites
 	FinishLine finishline = new FinishLine(this);
 	Player player = new Player(this,numPlayers);
 	Player robot1 = new Player(this,1);
@@ -60,15 +60,16 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		addMouseMotionListener(this);  
         setSize(300,300);  
         setLayout(null);  
-        setVisible(true);  
+        setVisible(true);
+        CustomCursor(); 
 	}
 	public void mouseClicked(MouseEvent e) {
 		//System.out.println("Mouse Clicked");
 		//Get bound of player icon and if Mouse X and Y intersect end the game
-		if (collision(e) && clicks==0){
+		if (collision(e) && clicks>0){
 			gameOver();
 		}
-		clicks++;
+		clicks--;
 	    //System.out.println("X: "+e.getX()+" Y: "+e.getY());
     } 
     public void mousePressed(MouseEvent e){}
@@ -167,13 +168,11 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 			robot5Count = new Random().nextInt(300);
 			ranNum5 = new Random().nextInt(300);
 		}					
-		count++;
-		// robot1Count++;
-		// robot2Count++;
-		// robot3Count++;
-		// robot4Count++;
-		// robot5Count++;	
+		count++;	
 	}
+	private int getScore() {
+		return clicks;
+	}	
 	public void paint(Graphics g) {
 		//this clears the screen before reprinting Player at new position
 		super.paint(g);
@@ -181,6 +180,18 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		//Antialiasing makes the figure smoother
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
+
+		g2d.setColor(Color.GRAY);
+		g2d.setFont(new Font("Verdana", Font.BOLD, 30));
+
+		//TEMP: Shows how many bullets are left
+		if (clicks >=0) {
+			g2d.drawString(String.valueOf(getScore()), 10, 30);
+		}
+			
+		/*************************************
+		**    Begin drawing                 **
+		*************************************/
 		finishline.paint(g2d);
 		player.paint(g2d);
 		g2d.drawImage(player.getImage(), player.getX(),
@@ -207,6 +218,13 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener {
 		JOptionPane.showMessageDialog(this, "Got him!",
 				"Game Over", JOptionPane.YES_NO_OPTION);
 		System.exit(ABORT);
+	}	
+	public void CustomCursor() {
+		Toolkit t1 = Toolkit.getDefaultToolkit();
+		Image img = t1.getImage("CrosshairBullet.png");
+		Point point = new Point(0,0);
+		Cursor cursor = t1.createCustomCursor(img, point, "Cursor");
+		setCursor(cursor);    
 	}	
 	public static void main(String[] args) throws InterruptedException {
 		//Name of the window
